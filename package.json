@@ -1,6 +1,6 @@
 {
-  "name": "nipponcolor",
-  "version": "0.1.0",
+  "name": "vuemp3player",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
