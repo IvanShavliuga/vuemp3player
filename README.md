@@ -1,4 +1,4 @@
-# vuemp3player
+﻿# vuemp3player
 
 ### v0.1.2
 Проигрывание группы Машина времени
@@ -11,6 +11,19 @@
 Обновление логотипа
 Разбиение на компоненты
 Исправление пагинации
+
+### v0.1.4 (develop)
+
+## Формула подключения базового интерфейса
+```
+<audio id="player" src="sound.mp3"></audio>
+<div>
+	<button onclick="document.getElementById('player').play()">Воспроизведение</button>
+	<button onclick="document.getElementById('player').pause()">Пауза</button>
+	<button onclick="document.getElementById('player').volume+=0.1">Громкость +</button>
+	<button onclick="document.getElementById('player').volume-=0.1">Громкость -</button>
+</div>
+```
 
 ## Project setup
 ```
