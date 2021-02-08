@@ -4,56 +4,40 @@
     <div
       v-if="files.length"
       class="playlist">
-      <div class="playlist__player">
-        <audio
-          controls
-          class="audio">
-          <source
-            :src="fullurl(id)"
-            type="audio/mpeg">
-          Тег audio не поддерживается вашим браузером.
-          <a :href="fullurl(id)">Скачайте музыку</a>.
-        </audio>
-        <span class="playlist__debug">{{ fullurl(id) }}</span>
-      </div>
-      <div
+      <complayer :file="fullurl(id)"/>
+      <comtrack
         v-for="(f,k) in pagearr"
-        :class="['playlist__item', (k==id)?'itemactive':'']"
         :key="k"
-        @click="selectfile(k)">
-        <div class="playlist__number">
-          #{{ getID(f) }}
-        </div>
-        <div class="playlist__name">
-          <span>Track: </span>
-          <span>{{ getID(f) }}</span>
-        </div>
-      </div>
-      <div class="playlist__panel">
-        <span class="playlist__prev">prev</span>
-        <span class="playlist__counter"> page {{ pagecurr }} of 5 </span>
-        <span
-          class="playlist__next"
-          @click="next">next</span>
-        <br>
-        <span
-          class="playlist__prev"
-          @click="folder=1">prev</span>
-        <span class="playlist__counter"> folder {{ folder }} of 2 </span>
-        <span
-          class="playlist__next"
-          @click="folder=2">next</span>
-        <br>
-        <br>
-        <br>
-      </div>
+        :index="f"
+        :pagecurr="pagecurr"
+        :selectid="id + 1"
+        @select="selectfile"/>
+      <compagination
+        :pagecurr="pagecurr"
+        :maxvalue="5"
+        @update="updtpage"
+      />
+      <comfolder
+        :folder="folder"
+        :maxvalue="2"
+        @update="updtfolder"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import complayer from '@/components/complayer.vue'
+import comtrack from '@/components/comtrack.vue'
+import compagination from '@/components/compagination.vue'
+import comfolder from '@/components/comfolder.vue'
 export default {
-  name: 'Playlist',
+  components: {
+    complayer,
+    comtrack,
+    compagination,
+    comfolder
+  },
   data () {
     return {
       filelink: '',
@@ -63,7 +47,7 @@ export default {
       pagearr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       pagecurr: 1,
       status: 'none',
-      baseurl: 'https://ivanshavliuga.github.io/simples/audio_tm/',
+      baseurl: 'https://ivanshavliuga.github.io/simples/audio_tm/'
     }
   },
   created () {
@@ -88,12 +72,13 @@ export default {
     getID (x) {
       return (this.pagecurr - 1) * 10 + x
     },
-    next () {
-      if (this.pagecurr < 5) {
-        this.pagecurr++
-      }
+    updtpage (pg) {
+      this.pagecurr = pg
     },
-  },
+    updtfolder (fld) {
+      this.folder = fld
+    }
+  }
 }
 </script>
 

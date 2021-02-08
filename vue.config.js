@@ -1,5 +1,5 @@
 module.exports = {
-  baseUrl: process.env.NODE_ENV === 'production' ? '/nippon-color/' : '/',
+  baseUrl: process.env.NODE_ENV === 'production' ? './' : '/',
   pwa: {
     themeColor: '#ffffff',
     msTileColor: '#ffffff',
@@ -8,8 +8,8 @@ module.exports = {
       clientsClaim: true,
     },
     iconPaths: {
-      favicon32: 'img/icons/fuji-mountain-32x32.png',
-      favicon16: 'img/icons/fuji-mountain-16x16.png',
+      favicon32: 'img/icons/iv2-32x32.png',
+      favicon16: 'img/icons/iv2-16x16.png',
       appleTouchIcon: 'img/icons/apple-touch-icon-152x152.png',
       maskIcon: 'img/icons/safari-pinned-tab.svg',
       msTileImage: 'img/icons/msapplication-icon-144x144.png',
