@@ -25,6 +25,8 @@
 </div>
 ```
 
+<a href="https://proweb63.ru/help/js/html5-audio-js">API</a>
+
 ## Project setup
 ```
 npm install
