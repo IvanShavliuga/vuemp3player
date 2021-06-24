@@ -52,7 +52,7 @@ export default {
   methods: {
     fullurl (id) {
       const rid = this.getID(id)
-      if (this.pagecurr < 2) return this.baseurl + 'telepatia000' + (rid + 1) + '.mp3'
+      if (this.pagecurr < 2 && rid < 9) return this.baseurl + 'telepatia000' + (rid + 1) + '.mp3'
       else return this.baseurl + 'telepatia00' + (rid + 1) + '.mp3'
     },
     /* fullurl (id) {
@@ -67,6 +67,7 @@ export default {
       let audiotag = document.querySelector('audio')
       audiotag.src = this.fullurl(id)
       this.id = id
+      audiotag.play()
     },
     getID (x) {
       return (this.pagecurr - 1) * 10 + x
