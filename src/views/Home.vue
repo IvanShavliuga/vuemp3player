@@ -17,11 +17,6 @@
         :maxvalue="5"
         @update="updtpage"
       />
-      <comfolder
-        :folder="folder"
-        :maxvalue="2"
-        @update="updtfolder"
-      />
     </div>
   </div>
 </template>
@@ -30,13 +25,12 @@
 import complayer from '@/components/complayer.vue'
 import comtrack from '@/components/comtrack.vue'
 import compagination from '@/components/compagination.vue'
-import comfolder from '@/components/comfolder.vue'
+
 export default {
   components: {
     complayer,
     comtrack,
-    compagination,
-    comfolder
+    compagination
   },
   data () {
     return {
