@@ -17,11 +17,6 @@
         :maxvalue="5"
         @update="updtpage"
       />
-      <comfolder
-        :folder="folder"
-        :maxvalue="2"
-        @update="updtfolder"
-      />
     </div>
   </div>
 </template>
@@ -30,13 +25,12 @@
 import complayer from '@/components/complayer.vue'
 import comtrack from '@/components/comtrack.vue'
 import compagination from '@/components/compagination.vue'
-import comfolder from '@/components/comfolder.vue'
+
 export default {
   components: {
     complayer,
     comtrack,
-    compagination,
-    comfolder
+    compagination
   },
   data () {
     return {
@@ -47,7 +41,7 @@ export default {
       pagearr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       pagecurr: 1,
       status: 'none',
-      baseurl: 'https://ivanshavliuga.github.io/simples/audio_tm/'
+      baseurl: 'https://ivanshavliuga.github.io/simples/audio/booksshop/telepat/'
     }
   },
   created () {
@@ -57,10 +51,15 @@ export default {
   },
   methods: {
     fullurl (id) {
+      const rid = this.getID(id)
+      if (this.pagecurr < 2) return this.baseurl + 'telepatia000' + (rid + 1) + '.mp3'
+      else return this.baseurl + 'telepatia00' + (rid + 1) + '.mp3'
+    },
+    /* fullurl (id) {
       const ext = (this.folder < 2) ? ('_tm.MP3') : ('_tm.mp3')
       const rid = this.getID(id)
       return this.baseurl + this.folder + '/' + (rid + 1) + ext
-    },
+    }, */
     playevent () {
       this.status = 'play'
     },

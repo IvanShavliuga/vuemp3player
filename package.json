@@ -1,6 +1,8 @@
 {
   "name": "vuemp3player",
-  "version": "0.1.3",
+  "version": "0.1.4",
+  "author": "iv2 (iva.drakon.nov@gmail.com)",
+  "homepage": "https://ivanshavliuga.github.io/pages/vuemp3player/index.html#/",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
