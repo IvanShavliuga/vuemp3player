@@ -1,12 +1,16 @@
 <template>
   <div id="app">
-    <router-view/>
+    <app-home />
   </div>
 </template>
 <script>
+import appHome from "@/views/Home.vue";
 export default {
-  mounted () {},
-}
+  components: {
+    appHome,
+  },
+  mounted() {},
+};
 </script>
 
 <style>
