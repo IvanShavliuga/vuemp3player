@@ -2,7 +2,18 @@
 <template>
   <div id="app">
     <div v-if="files.length" class="playlist">
-      <complayer :file="fullurl(id)" />
+      <complayer :file="fullurl(id)" noStandard>
+        <template #playerControl>
+          <div class="control">
+            <button class="control__btn" id="prevControl">&nbsp;</button>
+            <button class="control__btn" id="playControl">&nbsp;</button>
+            <button class="control__btn" id="pauseControl">&nbsp;</button>
+            <button class="control__btn" id="stopControl">&nbsp;</button>
+            <button class="control__btn" id="nextControl">&nbsp;</button>
+            <p id="volumeControl"></p>
+          </div>
+        </template>
+      </complayer>
       <comtrack
         v-for="(f, k) in pagearr"
         :key="k"
@@ -121,6 +132,11 @@ body {
   background-color: #fcfcfc;
   box-shadow: 1px 1px 3px 5px #aaa;
 }
+@media (max-width: 550px) {
+  .playlist {
+    width: 95%;
+  }
+}
 .playlist__item {
   background-color: #fcfcfc;
   position: relative;
@@ -174,5 +190,36 @@ audio {
 }
 .itemactive {
   background-color: #42a912;
+}
+.control {
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 70%;
+  transform: scale(1.2);
+}
+.control__btn {
+  border-radius: 50%;
+  padding: 10px;
+  margin: 3px;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  transform: scale(1.5);
+}
+#playControl {
+  background-image: url("../assets/icons/vcrplay.svg");
+}
+#pauseControl {
+  background-image: url("../assets/icons/vcrpause.svg");
+}
+#stopControl {
+  background-image: url("../assets/icons/vcrstop.svg");
+}
+#prevControl {
+  background-image: url("../assets/icons/vcrprev.svg");
+}
+#nextControl {
+  background-image: url("../assets/icons/vcrnext.svg");
 }
 </style>

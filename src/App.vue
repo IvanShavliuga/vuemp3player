@@ -20,6 +20,7 @@ html {
 }
 #app {
   height: 100%;
+  width: 100%;
   color: #0c0c0c;
 }
 </style>
