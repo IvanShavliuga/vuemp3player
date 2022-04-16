@@ -2,39 +2,47 @@
 <template>
   <div id="app">
     <div v-if="files.length" class="playlist">
-      <complayer :file="fullurl(id)" noStandard>
+      <ivplayer :file="fullurl(id)" noStandard>
         <template #playerControl>
           <div class="control">
             <button class="control__btn" id="prevControl">&nbsp;</button>
             <button class="control__btn" id="playControl">&nbsp;</button>
             <button class="control__btn" id="pauseControl">&nbsp;</button>
-            <button class="control__btn" id="stopControl">&nbsp;</button>
+            <!-- <button class="control__btn" id="stopControl">&nbsp;</button> -->
             <button class="control__btn" id="nextControl">&nbsp;</button>
             <p id="volumeControl"></p>
           </div>
         </template>
-      </complayer>
-      <comtrack
-        v-for="(f, k) in pagearr"
-        :key="k"
-        :index="f"
-        :pagecurr="pagecurr"
-        :selectid="id + 1"
-        @select="selectfile"
-      />
-      <compagination :pagecurr="pagecurr" :maxvalue="5" @update="updtpage" />
+        <template #playerList>
+          <comtrack
+            v-for="(f, k) in pagearr"
+            :key="k"
+            :index="f"
+            :pagecurr="pagecurr"
+            :selectid="id + 1"
+            @select="selectfile"
+          />
+        </template>
+        <template #playerPages>
+          <compagination
+            :pagecurr="pagecurr"
+            :maxvalue="5"
+            @update="updtpage"
+          />
+        </template>
+      </ivplayer>
     </div>
   </div>
 </template>
 
 <script>
-import complayer from "@/components/complayer.vue";
+import ivplayer from "@/components/complayer.vue";
 import comtrack from "@/components/comtrack.vue";
 import compagination from "@/components/compagination.vue";
 
 export default {
   components: {
-    complayer,
+    ivplayer,
     comtrack,
     compagination,
   },
