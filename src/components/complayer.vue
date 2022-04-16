@@ -8,11 +8,18 @@
     <div v-if="noStandard">
       <slot name="playerControl" @play="playClick" @pause="pauseClick"> </slot>
     </div>
-    <span class="playlist__debug">{{ shortName }} {{ volume }}</span>
+    <span class="playlist__debug">{{ shortName }} {{ timeStamp }}</span>
+    <div v-if="noStandard">
+      <slot name="playerList"> </slot>
+    </div>
+    <div v-if="noStandard">
+      <slot name="playerPages"> </slot>
+    </div>
   </div>
 </template>
 <script>
 export default {
+  name: "ivplayer",
   props: {
     file: {
       type: String,
@@ -29,6 +36,7 @@ export default {
       buttons: null,
       volume: null,
       metaData: null,
+      timeStamp: 0,
     };
   },
   computed: {
@@ -43,6 +51,12 @@ export default {
     pauseClick() {
       this.audioTag.pause();
     },
+    prevClick() {
+      console.log("prev");
+    },
+    nextClick() {
+      console.log("next");
+    },
     stopClick() {
       this.audioTag.pause();
     },
@@ -51,17 +65,30 @@ export default {
     this.audioTag = document.querySelector("audio");
     const btnPlay = document.querySelector("#playControl");
     const btnPause = document.querySelector("#pauseControl");
-    const btnStop = document.querySelector("#stopControl");
+    const btnPrev = document.querySelector("#prevControl");
+    const btnNext = document.querySelector("#nextControl");
+    this.buttons = [btnPlay, btnPause, btnPrev, btnNext];
     this.volume = this.audioTag.volume;
-    this.audioTag.addEventListener("progress", ({ ...arg }) =>
-      console.log(arg)
-    );
-    if (btnPause && btnPlay && btnStop) {
+    this.audioTag.addEventListener("progress", (el) => {
+      console.log(el);
+      console.log(this.audioTag.buffered);
+    });
+    this.audioTag.addEventListener("timeupdate", (el) => {
+      this.timeStamp = el.timeStamp;
+    });
+    console.log(this.audioTag.buffered);
+    this.audioTag.addEventListener("ended", ({ ...arg }) => console.log(arg));
+    if (btnPause) {
       btnPlay.addEventListener("click", () => this.playClick());
+    }
+    if (btnPlay) {
       btnPause.addEventListener("click", () => this.pauseClick());
-      btnStop.addEventListener("click", () => this.stopClick());
-      this.buttons = [btnPlay, btnPause, btnStop];
-      console.log(this.buttons);
+    }
+    if (btnPrev) {
+      btnPrev.addEventListener("click", () => this.prevClick());
+    }
+    if (btnNext) {
+      btnNext.addEventListener("click", () => this.nextClick());
     }
   },
 };
